@@ -35,27 +35,23 @@ export default class App extends React.Component {
       <>
         <input id="form" onChange={(e) => this.setState({ searchQuery: e.target.value })} placeholder="Enter a city name"></input>
 
-        <button id="formButton" onClick={this.getLocation}>Explore</button>
+        <button id="formButton" onClick={this.getLocation}>Let's Go!</button>
+        {this.state.isError &&
+            <h1 id="error"> ERROR!: {this.state.error.message}</h1>
+        }
         {this.state.location.place_id &&
           <>
+            <h1 id="error"> </h1>
             <h2> The city is: {this.state.location.display_name}</h2>
+            <h2> The latitude is: {this.state.location.lat}</h2>
+            <h2> The longitude is: {this.state.location.lon}</h2>
             <img src={mapUrl} alt="location" id="map" />
           </>
         }
-        {this.state.location.place_id &&
+                {this.state.location.place_id && this.state.isError &&
           <>
-            <h2> The latitude is: {this.state.location.lat}</h2>
+            
           </>
-        }
-        {this.state.location.place_id &&
-          <>
-            <h2> The longitude is: {this.state.location.lon}</h2>
-          </>
-        }
-        {this.state.isError &&
-
-            <h2> ERROR!: {this.state.error.message}</h2>
-
         }
       </>
     )
