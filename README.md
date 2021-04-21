@@ -10,8 +10,8 @@
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
-[WRRC](CityExplorerWRRC.png)
-
+[WRRC Day 1](CityExplorerWRRC.png)
+[WRRC Day 2](WRRCDay2.jpg)
 ## Change Log
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
