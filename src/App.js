@@ -2,6 +2,8 @@
 import './App.css';
 import React from 'react'
 import axios from 'axios'
+import Weather from './Weather.js'
+import {Button} from 'react-bootstrap'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,6 +13,7 @@ export default class App extends React.Component {
       location: {},
       error: {},
       isError: false,
+      weather: {},
     }
   };
 
@@ -21,14 +24,20 @@ export default class App extends React.Component {
 
       const response = await axios.get(apiUrl);
 
-      this.setState({ location: response.data[0],isError: false});
+      const backendUrl = `http://localhost:3001/weather?lat=${response.data[0].lat}&lon=${response.data[0].lon}`;
+
+      const weatherResponse = await axios.get(backendUrl);
+      console.log(weatherResponse);
+      this.setState({ location: response.data[0],isError: false, weather: weatherResponse.data[0]});
 
     } catch (error) {
+      // console.log(error);
       // const updatedState = { error, isError: true }
       this.setState({ 
         error,
         isError: true,
-        location: ""});
+        location: "",
+      });
     }
   }
 
@@ -38,7 +47,7 @@ export default class App extends React.Component {
       <>
         <input id="form" onChange={(e) => this.setState({ searchQuery: e.target.value })} placeholder="Enter a city name"></input>
 
-        <button id="formButton" onClick={this.getLocation}>Explore</button>
+        <Button id="formButton" onClick={this.getLocation}>Explore</Button>
         {this.state.isError &&
             <h1> ERROR!: {this.state.error.message}</h1>
         }
@@ -47,6 +56,10 @@ export default class App extends React.Component {
             <h2> The city is: {this.state.location.display_name}</h2>
             <h2> The latitude is: {this.state.location.lat}</h2>
             <h2> The longitude is: {this.state.location.lon}</h2>
+            <Weather
+              date={this.state.weather.date}
+              description={this.state.weather.description}    
+            />
             <img src={mapUrl} alt="location" id="map" />
           </>
         }
