@@ -13,21 +13,22 @@
 [WRRC Day 1](CityExplorerWRRC.png)
 [WRRC Day 2](WRRCDay2.jpg)
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+04-23-2021 7:30pm - Application now has a functional movie api
+
+<!-- 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. --> -->
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 Time Estimates
 For each of the lab features, make an estimate of the time it will take you to complete the feature, and record your start and finish times for that feature:
 
-Name of feature: ________________________________
+Name of feature: MovieAPI
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 3 hours
 
-Start time: _____
+Start time: 1:30pm
 
-Finish time: _____
+Finish time: 7:30pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 6 hours
