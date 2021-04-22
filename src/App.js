@@ -37,7 +37,7 @@ export default class App extends React.Component {
       const backendUrl = `http://localhost:3001/weather?lat=${response.data[0].lat}&lon=${response.data[0].lon}`;
 
       const weatherResponse = await axios.get(backendUrl);
-      // console.log(weatherResponse);
+      
       this.setState({ 
         location: response.data[0],
         isError: false,
