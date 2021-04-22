@@ -20,8 +20,8 @@ export default class App extends React.Component {
   };
 
   getMovies = async () => {
-    const apiUrl = `http://localhost:3001/movies?cityName=${this.state.searchQuery}`;
-
+    const apiUrl = `https://city---explorer.herokuapp.com/movies?cityName=${this.state.searchQuery}`;
+    
     const response = await axios.get(apiUrl);
 
     return this.setState({
@@ -31,11 +31,11 @@ export default class App extends React.Component {
   getLocation = async () => {
     try {
       const apiUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&q=${this.state.searchQuery}&format=json`;
-
+                      
       const response = await axios.get(apiUrl);
 
-      const backendUrl = `http://localhost:3001/weather?lat=${response.data[0].lat}&lon=${response.data[0].lon}`;
-
+      const backendUrl = `https://city---explorer.herokuapp.com/weather?lat=${response.data[0].lat}&lon=${response.data[0].lon}`;
+    
       const weatherResponse = await axios.get(backendUrl);
       
       this.setState({ 
