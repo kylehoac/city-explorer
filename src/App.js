@@ -45,8 +45,6 @@ export default class App extends React.Component {
       });
       this.getMovies();
     } catch (error) {
-      // console.log(error);
-      // const updatedState = { error, isError: true }
       this.setState({ 
         error,
         isError: true,
@@ -57,7 +55,13 @@ export default class App extends React.Component {
   renderMovies() {
     return this.state.movies.map((movie, idx) => {
       return(
-        <div key={idx}>{movie.name}</div>
+        <>
+        <h2 key={idx}>{movie.name}</h2>
+        <h3 key={idx}>{movie.overview}</h3>
+        <h3 key={idx}> Popularity: {movie.popularity}</h3>
+        {/* <p> Image : https://image.tmdb.org/t/p/w500/{movie.image}</p> */}
+        <img alt="Movie poster" src={`https://image.tmdb.org/t/p/w500/${movie.image}`}></img>
+        </>
       )
     })
   }
@@ -80,8 +84,8 @@ export default class App extends React.Component {
               date={this.state.weather.date}
               description={this.state.weather.description}    
             />
-            <h2> Movies: {this.renderMovies()}</h2>
             <img src={mapUrl} alt="location" id="map" />
+            <h1> Movies: {this.renderMovies()}</h1>
           </>
         }
       </>
