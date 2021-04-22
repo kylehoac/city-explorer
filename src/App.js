@@ -4,6 +4,7 @@ import React from 'react'
 import axios from 'axios'
 import Weather from './Weather.js'
 import {Button} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,10 +15,19 @@ export default class App extends React.Component {
       error: {},
       isError: false,
       weather: {},
+      movies: [],
     }
   };
 
+  getMovies = async () => {
+    const apiUrl = `http://localhost:3001/movies?cityName=${this.state.searchQuery}`;
 
+    const response = await axios.get(apiUrl);
+
+    return this.setState({
+      movies: response.data,
+    });
+  }
   getLocation = async () => {
     try {
       const apiUrl = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&q=${this.state.searchQuery}&format=json`;
@@ -27,9 +37,13 @@ export default class App extends React.Component {
       const backendUrl = `http://localhost:3001/weather?lat=${response.data[0].lat}&lon=${response.data[0].lon}`;
 
       const weatherResponse = await axios.get(backendUrl);
-      console.log(weatherResponse);
-      this.setState({ location: response.data[0],isError: false, weather: weatherResponse.data[0]});
-
+      // console.log(weatherResponse);
+      this.setState({ 
+        location: response.data[0],
+        isError: false,
+        weather: weatherResponse.data[0]
+      });
+      this.getMovies();
     } catch (error) {
       // console.log(error);
       // const updatedState = { error, isError: true }
@@ -40,7 +54,13 @@ export default class App extends React.Component {
       });
     }
   }
-
+  renderMovies() {
+    return this.state.movies.map((movie, idx) => {
+      return(
+        <div key={idx}>{movie.name}</div>
+      )
+    })
+  }
   render() {
     const mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITY_EXPLORER_KEY}&center=${this.state.location.lat},${this.state.location.lon}&zoom=<zoom>&size=${window.innerWidth}x300&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`
     return (
@@ -49,7 +69,7 @@ export default class App extends React.Component {
 
         <Button id="formButton" onClick={this.getLocation}>Explore</Button>
         {this.state.isError &&
-            <h1> ERROR!: {this.state.error.message}</h1>
+            <h1 className="mt-3 text-black"> ERROR!: {this.state.error.message}</h1>
         }
         {this.state.location.place_id &&
           <>
@@ -60,6 +80,7 @@ export default class App extends React.Component {
               date={this.state.weather.date}
               description={this.state.weather.description}    
             />
+            <h2> Movies: {this.renderMovies()}</h2>
             <img src={mapUrl} alt="location" id="map" />
           </>
         }
