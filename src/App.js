@@ -59,7 +59,7 @@ export default class App extends React.Component {
         <h3 key={idx}>{movie.overview}</h3>
         <h3 key={idx}> Popularity: {movie.popularity}</h3>
         {/* <p> Image : https://image.tmdb.org/t/p/w500/{movie.image}</p> */}
-        <img alt="Movie poster" src={`https://image.tmdb.org/t/p/w500/${movie.image}`}></img>
+        <img alt="No Movie Poster Found" src={`https://image.tmdb.org/t/p/w500/${movie.image}`}></img>
         </>
       )
     })
