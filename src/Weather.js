@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react';
+import WeatherDay from './weatherday.js';
 
-export default class Weather extends React.Component{
+class Weather extends React.Component {
     render() {
-        return(
-            <>
-                <h2> Date: {this.props.date}</h2>
-                <h2> Description: {this.props.description}</h2>
-            </>
+        return(  
+            this.props.forecasts.map((day,idx) => (
+                <WeatherDay date={day.date} description={day.description} idx={idx}/>
+            )
+            )
         );
     }
 }
 
+export default Weather;
