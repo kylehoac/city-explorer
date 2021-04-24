@@ -21,6 +21,7 @@ export default class App extends React.Component {
 
   getMovies = async () => {
     const apiUrl = `https://city---explorer.herokuapp.com/movies?cityName=${this.state.searchQuery}`;
+    // const apiUrl = `http://localhost:3001/movies?cityName=${this.state.searchQuery}`
     
     const response = await axios.get(apiUrl);
     
@@ -36,6 +37,8 @@ export default class App extends React.Component {
       const response = await axios.get(apiUrl);
 
       const backendUrl = `https://city---explorer.herokuapp.com/weather?lat=${response.data[0].lat}&lon=${response.data[0].lon}`;
+
+      // const backendUrl = `http://localhost:3001/weather?lat=${response.data[0].lat}&lon=${response.data[0].lon}`
     
       const weatherResponse = await axios.get(backendUrl);
       
